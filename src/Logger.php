@@ -8,18 +8,19 @@ use Monolog\Handler\NativeMailerHandler;
 use Leedch\Validator\Validator;
 
 /**
- * Currently uses Monolog, because I really like it. I just use this class to 
+ * Currently uses Monolog, because I really like it. I just use this class to
  * extend some methods I often use
  * @author david.lee
  */
 abstract class Logger extends MonoLogger
 {
     protected $logFile;
-    
-    public function __construct(string $name) {
+
+    public function __construct(string $name)
+    {
         parent::__construct($name);
     }
-    
+
     /**
      * Set up a logger to write to logFile
      * @param string $logFile
@@ -29,9 +30,9 @@ abstract class Logger extends MonoLogger
     {
         $this->logFile = $logFile;
         $stream = new StreamHandler($logFile, $logLevel);
-        $this->pushHandler($stream);        
+        $this->pushHandler($stream);
     }
-    
+
     /**
      * Set up the logger to send an email
      * @param string $emailTo
@@ -44,7 +45,7 @@ abstract class Logger extends MonoLogger
         $mail = new NativeMailerHandler($emailTo, $emailSubject, $emailFrom, $logLevel);
         $this->pushHandler($mail);
     }
-    
+
     /**
      * Reads a logfile line by line and makes it into an array
      * @param int $limit
@@ -72,7 +73,7 @@ abstract class Logger extends MonoLogger
         }
         return $arrOutput;
     }
-    
+
     /**
      * Creates an array from one log line
      * @param string $row
@@ -96,7 +97,7 @@ abstract class Logger extends MonoLogger
         ];
         return $out;
     }
-    
+
     /**
      * Empty the logFile. I just prefer the word flush, sounds more fun
      *  .__   .-".
@@ -106,7 +107,7 @@ abstract class Logger extends MonoLogger
      *  ("-..-" /
      *   "-.-" /
      *     /   |
-     *     "--"  
+     *     "--"
      */
     public function flush()
     {
