@@ -26,7 +26,7 @@ abstract class Logger extends MonoLogger
      * @param string $logFile
      * @param int $logLevel
      */
-    protected function setFileHandler(string $logFile, int $logLevel = null)
+    protected function setFileHandler(string $logFile, int $logLevel = 100)
     {
         $this->logFile = $logFile;
         $stream = new StreamHandler($logFile, $logLevel);
